@@ -1,0 +1,7 @@
+django_auth_backend/.env
+django_auth_backend/.docker_env
+__pycache__/
+.idea/
+.venv/
+
+
