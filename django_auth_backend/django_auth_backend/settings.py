@@ -47,6 +47,10 @@ class BaseConfig(Configuration):
         'rest_framework_swagger',
         'drf_yasg',
 
+        #oauth
+        'oauth2_provider',
+        'social_django',
+        'drf_social_oauth2',
         #app modules
 
         # health check
@@ -81,10 +85,13 @@ class BaseConfig(Configuration):
                     'django.template.context_processors.request',
                     'django.contrib.auth.context_processors.auth',
                     'django.contrib.messages.context_processors.messages',
+                    'social_django.context_processors.backends',
+                    'social_django.context_processors.login_redirect',
                 ],
             },
         },
     ]
+
 
     WSGI_APPLICATION = 'django_auth_backend.wsgi.application'
 
@@ -137,16 +144,27 @@ class Local(BaseConfig):
     ]
 
     REST_FRAMEWORK = {
+        'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
         'DEFAULT_PERMISSION_CLASSES': [
             'rest_framework.permissions.AllowAny',
         ],
-        # 'DEFAULT_AUTHENTICATION_CLASSES': (
-        #     'rest_framework_simplejwt.authentication.JWTAuthentication',
-        # ),
+        'DEFAULT_AUTHENTICATION_CLASSES': (
+            # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+            'oauth2_provider.contrib.rest_framework.OAuth2Authentication',  # django-oauth-toolkit >= 1.0.0
+            'drf_social_oauth2.authentication.SocialAuthentication',
+        ),
+
 
         'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
         'PAGE_SIZE': 50,
     }
+
+    AUTHENTICATION_BACKENDS = (
+        'drf_social_oauth2.backends.DjangoOAuth2',
+        'django.contrib.auth.backends.ModelBackend',
+    )
+
+    # ACTIVATE_JWT = True
 
 
 class Dev(BaseConfig):

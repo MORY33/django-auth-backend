@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
 from rest_framework.routers import SimpleRouter
 from drf_yasg.views import get_schema_view
@@ -26,7 +26,13 @@ urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
+    # Oauth
+    # path('auth/', include('drf_social_oauth2.urls', namespace='drf')),
+    re_path(r'^auth/', include('drf_social_oauth2.urls', namespace='drf')),
 
+    # Project urls
+
+    # Management
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('health_check/', include('health_check.urls')),
 
