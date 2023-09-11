@@ -40,18 +40,20 @@ class BaseConfig(Configuration):
         'django.contrib.messages',
         'django.contrib.staticfiles',
 
-        #external modules
+        # external modules
         'rest_framework',
         'debug_toolbar',
         'corsheaders',
         'rest_framework_swagger',
         'drf_yasg',
 
-        #oauth
+        # oauth
         'oauth2_provider',
         'social_django',
         'drf_social_oauth2',
-        #app modules
+
+        # app modules
+        "custom_jwt",
 
         # health check
         'health_check',  # required
@@ -149,8 +151,8 @@ class Local(BaseConfig):
             'rest_framework.permissions.AllowAny',
         ],
         'DEFAULT_AUTHENTICATION_CLASSES': (
-            # 'rest_framework_simplejwt.authentication.JWTAuthentication',
             'oauth2_provider.contrib.rest_framework.OAuth2Authentication',  # django-oauth-toolkit >= 1.0.0
+
             'drf_social_oauth2.authentication.SocialAuthentication',
         ),
 
@@ -159,12 +161,23 @@ class Local(BaseConfig):
         'PAGE_SIZE': 50,
     }
 
+
     AUTHENTICATION_BACKENDS = (
+        # Google OAuth2
+        'social_core.backends.google.GoogleOAuth2',
         'drf_social_oauth2.backends.DjangoOAuth2',
         'django.contrib.auth.backends.ModelBackend',
     )
+    # Google configuration
+    SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+    SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
 
-    # ACTIVATE_JWT = True
+    # Define SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE to get extra permissions from Google.
+    SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+        'https://www.googleapis.com/auth/userinfo.email',
+        'https://www.googleapis.com/auth/userinfo.profile',
+    ]
+    ACTIVATE_JWT = True
 
 
 class Dev(BaseConfig):
@@ -175,9 +188,6 @@ class Dev(BaseConfig):
         'DEFAULT_PERMISSION_CLASSES': [
             'rest_framework.permissions.IsAuthenticated',
         ],
-        # 'DEFAULT_AUTHENTICATION_CLASSES': (
-        #     'rest_framework_simplejwt.authentication.JWTAuthentication',
-        # ),
 
         'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
         'PAGE_SIZE': 50,
