@@ -152,7 +152,6 @@ class Local(BaseConfig):
         ],
         'DEFAULT_AUTHENTICATION_CLASSES': (
             'oauth2_provider.contrib.rest_framework.OAuth2Authentication',  # django-oauth-toolkit >= 1.0.0
-
             'drf_social_oauth2.authentication.SocialAuthentication',
         ),
 
@@ -160,7 +159,6 @@ class Local(BaseConfig):
         'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
         'PAGE_SIZE': 50,
     }
-
 
     AUTHENTICATION_BACKENDS = (
         # Google OAuth2
@@ -178,6 +176,17 @@ class Local(BaseConfig):
         'https://www.googleapis.com/auth/userinfo.profile',
     ]
     ACTIVATE_JWT = True
+
+    OAUTH2_PROVIDER = {
+        "ACCESS_TOKEN_GENERATOR": "custom_jwt.backends.CustomTokenGenerator",
+        "REFRESH_TOKEN_GENERATOR": "custom_jwt.backends.CustomTokenGenerator",
+    }
+    #
+    # OAUTH2_PROVIDER_ACCESS_TOKEN_MODEL = "custom_jwt.CustomAccessToken"
+    # OAUTH2_PROVIDER_REFRESH_TOKEN_MODEL = "custom_jwt.CustomAccessToken"
+
+
+
 
 
 class Dev(BaseConfig):
