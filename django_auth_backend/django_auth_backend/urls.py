@@ -7,7 +7,6 @@ from drf_yasg import openapi
 from rest_framework import permissions
 
 
-
 schema_view = get_schema_view(
     openapi.Info(
         title="Scurve django backend API",
@@ -30,6 +29,7 @@ urlpatterns = [
     # Oauth
     # path('auth/', include('drf_social_oauth2.urls', namespace='drf')),
     re_path(r'^auth/', include('drf_social_oauth2.urls', namespace='drf')),
+    path('', include('custom_jwt.urls')),
 
     # Project urls
 

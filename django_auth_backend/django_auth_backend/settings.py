@@ -1,11 +1,11 @@
 from pathlib import Path
 from configurations import Configuration, values
 from decouple import config
-
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+print(BASE_DIR)
 
 
 class BaseConfig(Configuration):
@@ -64,6 +64,7 @@ class BaseConfig(Configuration):
         'health_check.contrib.psutil',  # disk and memory utilization; requires psutil
     ]
     MIDDLEWARE = [
+        'django_auth_backend.middleware.UnicodeEncodeErrorMiddleware',
         'corsheaders.middleware.CorsMiddleware',
         'django.middleware.security.SecurityMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
@@ -180,6 +181,7 @@ class Local(BaseConfig):
         "ACCESS_TOKEN_GENERATOR": "custom_jwt.backends.CustomTokenGenerator",
         "REFRESH_TOKEN_GENERATOR": "custom_jwt.backends.CustomTokenGenerator",
     }
+
     #
     # OAUTH2_PROVIDER_ACCESS_TOKEN_MODEL = "custom_jwt.CustomAccessToken"
     # OAUTH2_PROVIDER_REFRESH_TOKEN_MODEL = "custom_jwt.CustomAccessToken"
@@ -200,9 +202,6 @@ class Dev(BaseConfig):
         'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
         'PAGE_SIZE': 50,
     }
-
-
-
 
 
 
