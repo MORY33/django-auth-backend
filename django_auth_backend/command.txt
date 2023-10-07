@@ -1,0 +1,13 @@
+EuTjKFqf4wX9O5asKPI5gLRx1bFhJUjcBf9aMMR7
+
+pbkdf2_sha256$600000$rGp4AaoyetdxOkIbm1hHru$huVpP8y63sgBMr1OS3keQ2JiaYrNvn+eom+QbNoFwtw=
+
+
+curl -X POST -d "client_id=EuTjKFqf4wX9O5asKPI5gLRx1bFhJUjcBf9aMMR7&client_secret=pbkdf2_sha256$600000$rGp4AaoyetdxOkIbm1hHru$huVpP8y63sgBMr1OS3keQ2JiaYrNvn+eom+QbNoFwtw=&grant_type=password&username=test&password=testowy33" http://localhost:8000/auth/token
+
+
+
+ZAQjaHdDo0uVu4y4QIj4UjpKJk8pdugzUCIKCEvK
+
+
+0l63NJz9JlUClQe3lspZuUWJaET0G0REilMofwVFq10URNVmkYInM2e8gV7c7oyyrOvj51yajkD1rvsn2zG1vOld7UsLMReuGgGCGIKkGdrLIkn8PEM847PSXq5uIYaE

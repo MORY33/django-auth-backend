@@ -155,7 +155,6 @@ class Local(BaseConfig):
             'drf_social_oauth2.authentication.SocialAuthentication',
         ),
 
-
         'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
         'PAGE_SIZE': 50,
     }

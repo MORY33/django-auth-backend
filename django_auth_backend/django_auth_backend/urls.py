@@ -7,13 +7,14 @@ from drf_yasg import openapi
 from rest_framework import permissions
 
 
+
 schema_view = get_schema_view(
     openapi.Info(
         title="Scurve django backend API",
         default_version='v1',
         description="First version of scurve django backend",
         # terms_of_service="{'terms': 'Respect everyone'}",
-        contact=openapi.Contact(email="rafal.karwot@nokia.com"),
+        contact=openapi.Contact(email="rafa.karwot@gmail.com"),
         license=openapi.License(name="MIT License"),
     ),
     public=True,
