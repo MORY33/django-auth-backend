@@ -176,6 +176,7 @@ class Local(BaseConfig):
         'https://www.googleapis.com/auth/userinfo.email',
         'https://www.googleapis.com/auth/userinfo.profile',
     ]
+
     ACTIVATE_JWT = True
 
     OAUTH2_PROVIDER = {
@@ -183,11 +184,10 @@ class Local(BaseConfig):
         "REFRESH_TOKEN_GENERATOR": "custom_jwt.backends.CustomTokenGenerator",
     }
 
-    # oauth2_settings.DEFAULTS['ACCESS_TOKEN_EXPIRE_SECONDS'] = 1.577e7
+    oauth2_settings.DEFAULTS['ACCESS_TOKEN_EXPIRE_SECONDS'] = 1.577e7
 
-    #
-    # OAUTH2_PROVIDER_ACCESS_TOKEN_MODEL = "custom_jwt.CustomAccessToken"
-    # OAUTH2_PROVIDER_REFRESH_TOKEN_MODEL = "custom_jwt.CustomAccessToken"
+    # OAUTH2_PROVIDER_ACCESS_TOKEN_MODEL = "custom_jwt.backends.CustomTokenGenerator"
+    # OAUTH2_PROVIDER_REFRESH_TOKEN_MODEL = "custom_jwt.backends.CustomTokenGenerator"
 
 
 

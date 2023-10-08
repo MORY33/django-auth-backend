@@ -23,7 +23,7 @@ class ExchangeToken(APIView):
 
         response = requests.post(token_endpoint, data=payload)
         data = response.json()
-        print(data)
+        # print(data)
 
         if "error" in data:
             return Response({"error": data["error"]})
@@ -58,4 +58,11 @@ class RefreshToken(APIView):
             return Response({"error": data["error"]})
 
         return Response(data)
+
+
+class Test(APIView):
+    def get(self, request, *args, **kwargs):
+        # print(request.META)
+        print(request.user)
+        return Response({"in": "get"})
 

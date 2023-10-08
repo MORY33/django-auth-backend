@@ -18,10 +18,13 @@ def CustomTokenGenerator(request, length=30, chars=UNICODE_ASCII_CHARACTER_SET):
     """
     from django.conf import settings
     from jose import jwt
-
+    from decouple import config
     rand = SystemRandom()
     secret = getattr(settings, 'SECRET_KEY')
+    print(secret)
     print("in my custom generate_token")
     token = ''.join(rand.choice(chars) for x in range(length))
-    jwtted_token = jwt.encode({'token': token, 'user': str(request.user), 'test': 'owy'}, secret, algorithm='HS256')
+    jwtted_token = jwt.encode({'token': token, 'user': str(request.user), 'test': 'testo'}, secret, algorithm='HS256')
     return jwtted_token
+
+

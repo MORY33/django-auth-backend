@@ -28,6 +28,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     # Oauth
     # path('auth/', include('drf_social_oauth2.urls', namespace='drf')),
+    re_path(r'^auth/', include('social_django.urls', namespace='social')),
     re_path(r'^auth/', include('drf_social_oauth2.urls', namespace='drf')),
     path('', include('custom_jwt.urls')),
 
