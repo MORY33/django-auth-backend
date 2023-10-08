@@ -2,6 +2,7 @@ from pathlib import Path
 from configurations import Configuration, values
 from decouple import config
 import os
+from oauth2_provider import settings as oauth2_settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -181,6 +182,8 @@ class Local(BaseConfig):
         "ACCESS_TOKEN_GENERATOR": "custom_jwt.backends.CustomTokenGenerator",
         "REFRESH_TOKEN_GENERATOR": "custom_jwt.backends.CustomTokenGenerator",
     }
+
+    # oauth2_settings.DEFAULTS['ACCESS_TOKEN_EXPIRE_SECONDS'] = 1.577e7
 
     #
     # OAUTH2_PROVIDER_ACCESS_TOKEN_MODEL = "custom_jwt.CustomAccessToken"

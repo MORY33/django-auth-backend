@@ -35,3 +35,27 @@ class ExchangeToken(APIView):
             "access_token": access_token,
             "refresh_token": refresh_token
         })
+
+class RefreshToken(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        refresh_token = request.data.get("refresh")
+        print(refresh_token)
+        token_endpoint = "http://localhost:8000/auth/token"
+        payload = {
+            "grant_type": "refresh_token",
+            "refresh_token": refresh_token,
+            "client_id": config('DJANGO_CLIENT_ID'),
+            "client_secret": config('DJANGO_CLIENT_SECRET'),
+        }
+
+        response = requests.post(token_endpoint, data=payload)
+        data = response.json()
+        print(data)
+
+        if "error" in data:
+            return Response({"error": data["error"]})
+
+        return Response(data)
+
